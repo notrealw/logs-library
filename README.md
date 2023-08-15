@@ -4,9 +4,9 @@
 A library to facilitate the recording of events within your script through Discord Webhooks in LuaU.
 
 
-## Documentação da Biblioteca
+## Library Docs
 
-### Inicialização
+### Startup
 
 ```lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/raavenkkj/logs-library/main/logslibrary.lua"))()
