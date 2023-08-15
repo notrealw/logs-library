@@ -52,7 +52,7 @@ Library:Load()
 
 
 
-### Resultado
+### Result
 
 ![App Screenshot](https://cdn.discordapp.com/attachments/1099772468606025768/1141122223650906132/image.png)
 
