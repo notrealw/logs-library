@@ -119,7 +119,7 @@ function logscript:Load()
   if logscript.JoinScript then
     table.insert(PlayerData["embeds"][1]["fields"], {
       ["name"] = "Join Script:",
-      ["value"] = '```lua\ngame:GetService("TeleportService"):TeleportToPlaceInstance('..tostring(game.PlaceId)..', '..tostring(game.JobId)..', game.Players.LocalPlayer)\n```',
+      ["value"] = '```lua\n-- Join Game\n--Game: '.. game:GetService("MarketplaceService"):GetProductInfo(game.Placeid).Name..'\n\ngame:GetService("TeleportService"):TeleportToPlaceInstance('..tostring(game.PlaceId)', '..'"'..tostring(game.JobId)..'"'..', game.Players.LocalPlayer)\n```',
       ["inline"] = true
     })
   end
